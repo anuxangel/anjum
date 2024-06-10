@@ -1,0 +1,97 @@
+
+  <div class="container">
+    <h2>Get your art here!</h2>
+    <form id="purchaseForm" onsubmit="event.preventDefault()">
+      <div class="form-group">
+        <label for="fullName">Full Name:</label>
+        <input type="text" id="fullName" name="fullName">
+        <span class="error" id="fullNameError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+        <span class="error" id="emailError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address"></textarea>
+        <span class="error" id="addressError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="artwork">Artwork:</label>
+        <select id="artwork" name="artwork" onchange="calculatePrice()">
+          <option value="">Select Artwork</option>
+          <option value="artwork1">Abstract Painting</option>
+          <option value="artwork2">Modern Sculpture</option>
+          <option value="artwork3">Digital Art Print</option>
+        </select>
+        <span class="error" id="artworkError"></span>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <div id="price">$0.00</div>
+      </div>
+      <button id="bookBtn" class="proceedBtn" style="display: none;" onclick="book()">Book</button>
+    </form>
+
+    <div id="purchaseMessage" class="purchaseMessage" style="display: none;"></div>
+    <button routerLink="/success" type="submit">Place order</button>
+  </div>
+
+  <script>
+    function calculatePrice() {
+      var artwork = document.getElementById("artwork").value;
+      var priceElement = document.getElementById("price");
+
+      switch (artwork) {
+        case "artwork1":
+          priceElement.textContent = "$120.00";
+          break;
+        case "artwork2":
+          priceElement.textContent = "$350.00";
+          break;
+        case "artwork3":
+          priceElement.textContent = "$45.00";
+          break;
+        default:
+          priceElement.textContent = "$0.00";
+          break;
+      }
+    }
+
+    function showProceedToPay() {
+      var paymentMethod = document.getElementById("paymentMethod").value;
+      var proceedToPayBtn = document.getElementById("proceedToPayBtn");
+      var bookBtn = document.getElementById("bookBtn");
+
+      if (paymentMethod !== "") {
+        proceedToPayBtn.style.display = "block";
+      } else {
+        proceedToPayBtn.style.display = "none";
+      }
+
+      if (paymentMethod !== "" && document.getElementById("artwork").value !== "") {
+        bookBtn.style.display = "block";
+      } else {
+        bookBtn.style.display = "none";
+      }
+    }
+
+    function proceedToPay() {
+      // Your proceed to pay logic goes here
+    }
+
+    function book() {
+      // Your book logic goes here
+    }
+
+    document.getElementById("submitButton").addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent form submission
+      document.getElementById("purchaseMessage").style.display = "block";
+      document.getElementById("purchaseMessage").textContent = "Your order is placed successfully";
+    });
+  </script>

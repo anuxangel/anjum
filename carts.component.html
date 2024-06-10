@@ -1,0 +1,16 @@
+<div class="container">
+    <h2>Shopping Cart</h2>
+    <div *ngIf="addedItem" class="cart-item">
+      <img [src]="addedItem.image" [alt]="addedItem.title" class="cart-item-image">
+      <div class="cart-item-details">
+        <h3>{{ addedItem.title }}</h3>
+        <p>Description of the art piece.</p>
+        <p class="price">Price: ${{ addedItem.price }}</p>
+        <button (click)="removeFromCart()" class="remove-button">Remove</button>
+      </div>
+    </div>
+    <div *ngIf="!addedItem" class="empty-cart-message">
+      Your cart is empty.
+      
+    </div>
+  </div>

@@ -1,0 +1,31 @@
+<div class="auth-container">
+  <form (ngSubmit)="onSubmit(username.value, newPassword.value, confirmPassword.value)">
+    <h2>Sign In</h2>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" #username required>
+      <div *ngIf="submitted && !username.value" class="error">
+        Username is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="newPassword">New Password</label>
+      <input type="password" id="newPassword" #newPassword required minlength="8">
+      <div *ngIf="submitted && !newPassword.value" class="error">
+        New Password is required
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" #confirmPassword required>
+      <div *ngIf="submitted && !confirmPassword.value" class="error">
+        Confirm Password is required
+      </div>
+      <div *ngIf="submitted && newPassword.value !== confirmPassword.value" class="error">
+        Passwords do not match
+      </div>
+    </div>
+    <button routerLink="/home" type="submit">Sign In</button>
+  </form>
+</div>
+
